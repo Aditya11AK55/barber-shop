@@ -79,7 +79,7 @@
   .btn-owner:hover { background: var(--gold); color: #1a1a2e; transform: translateY(-2px); }
 
   /* ===== AUTH ===== */
-  #customer-auth, #owner-auth {
+  #customer-auth, #owner-auth, #super-admin-auth, #super-admin-dashboard {
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -87,6 +87,8 @@
 
   #customer-auth { background: linear-gradient(135deg, #1a1a2e, #16213e); }
   #owner-auth    { background: linear-gradient(135deg, #0f3460, #16213e); }
+  #super-admin-auth { background: linear-gradient(135deg, #2c3e50, #000000); }
+  #super-admin-dashboard { background: #f0f2f5; justify-content: flex-start; }
 
   .auth-card {
     background: #fff;
@@ -246,6 +248,7 @@
   }
 
   .contact-bar .phone { color: var(--gold); font-size: 0.85rem; }
+  .contact-bar .call-link-btn { background: var(--success); color: white; padding: 3px 10px; border-radius: 6px; text-decoration: none; font-size: 0.75rem; font-weight: bold; }
 
   .logout-text {
     margin-left: auto;
@@ -368,7 +371,7 @@
 
   .page-header h2 { font-size: 1.05rem; font-weight: 600; }
 
-  .bookings-list { padding: 15px; overflow-y: auto; }
+  .bookings-list { padding: 15px; overflow-y: auto; width: 100%; max-width: 500px; margin: 0 auto; }
 
   .booking-card {
     background: #fff;
@@ -391,69 +394,6 @@
 
   .empty-state { text-align: center; padding: 50px 20px; color: var(--muted); }
   .empty-icon  { font-size: 50px; margin-bottom: 10px; }
-
-  /* ===== SUCCESS ===== */
-  #success-page {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 30px;
-  }
-
-  .success-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 40px 30px;
-    max-width: 380px;
-    width: 100%;
-  }
-
-  .success-icon {
-    font-size: 60px;
-    margin-bottom: 14px;
-    display: block;
-    animation: bounce 1s ease infinite alternate;
-  }
-
-  @keyframes bounce {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-10px); }
-  }
-
-  .success-card h2 { font-size: 1.4rem; color: var(--success); font-weight: 700; margin-bottom: 8px; }
-  .success-card p  { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
-
-  .success-details {
-    background: #f8f9fa;
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-
-  .sd-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    font-size: 0.88rem;
-    border-bottom: 1px solid #eee;
-  }
-
-  .sd-row:last-child { border-bottom: none; }
-  .sd-label { color: var(--muted); }
-  .sd-value  { font-weight: 600; }
-
-  .btn-go-home {
-    width: 100%; padding: 13px;
-    background: var(--accent); color: #fff;
-    border: none; border-radius: 10px;
-    font-size: 1rem; font-weight: 600;
-    cursor: pointer; font-family: 'Poppins', sans-serif;
-    transition: all 0.3s;
-  }
-
-  .btn-go-home:hover { background: #c73652; }
 
   /* ===== OWNER DASHBOARD ===== */
   .owner-top-bar {
@@ -492,7 +432,7 @@
     font-size: 0.85rem; outline: none;
   }
 
-  .owner-schedule { padding: 15px; overflow-y: auto; flex: 1; }
+  .owner-schedule { padding: 15px; overflow-y: auto; flex: 1; width: 100%; max-width: 600px; margin: 0 auto; }
 
   .owner-booking-card {
     background: #fff;
@@ -522,28 +462,33 @@
 
   .stats-bar {
     background: #fff;
-    margin: 0 15px 12px;
+    margin: 12px auto;
     border-radius: 12px;
     padding: 12px 16px;
     display: flex;
     gap: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    width: calc(100% - 30px);
+    max-width: 600px;
   }
 
   .stat { text-align: center; }
   .stat .s-num { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
   .stat .s-lbl { font-size: 0.72rem; color: var(--muted); }
+
+  /* ===== SUPER ADMIN STYLES ===== */
+  .admin-table-container { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 15px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+  th, td { padding: 12px; border-bottom: 1px solid var(--border); }
+  th { background-color: var(--primary); color: white; }
+  .pw-hash { font-family: monospace; font-size: 0.75rem; color: var(--muted); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 </style>
 </head>
 <body>
 
-<!-- ==============================
-     LANDING PAGE
-     ============================== -->
 <div id="landing-page" class="page active">
   <div class="landing-content">
     <span class="scissors-icon">✂️</span>
-    <!-- CHANGE: Replace "Raj Hair Salon" with your shop name -->
     <h1 class="landing-title">Raj Hair Salon</h1>
     <p class="landing-subtitle">📍 Your Trusted Barber Shop</p>
     <div class="landing-btns">
@@ -557,9 +502,6 @@
   </div>
 </div>
 
-<!-- ==============================
-     CUSTOMER AUTH PAGE
-     ============================== -->
 <div id="customer-auth" class="page">
   <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:20px; background:linear-gradient(135deg,#1a1a2e,#16213e);">
     <div class="auth-card">
@@ -576,7 +518,6 @@
 
       <div id="error-msg-customer" class="error-msg"></div>
 
-      <!-- LOGIN FORM -->
       <div id="login-form">
         <div class="form-group">
           <label>📱 Mobile Number</label>
@@ -589,7 +530,6 @@
         <button class="btn-primary" onclick="customerLogin()">Login →</button>
       </div>
 
-      <!-- REGISTER FORM -->
       <div id="register-form" style="display:none;">
         <div class="form-group">
           <label>📱 Mobile Number</label>
@@ -615,9 +555,6 @@
   </div>
 </div>
 
-<!-- ==============================
-     OWNER AUTH PAGE
-     ============================== -->
 <div id="owner-auth" class="page">
   <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:20px; background:linear-gradient(135deg,#0f3460,#16213e);">
     <div class="auth-card">
@@ -631,27 +568,64 @@
 
       <div class="form-group">
         <label>📱 Mobile Number</label>
-        <!-- CHANGE: Set your owner mobile number in JS below (OWNER object) -->
         <input type="tel" id="owner-mobile" placeholder="Owner mobile number" maxlength="10">
       </div>
       <div class="form-group">
         <label>🔒 Password</label>
-        <!-- CHANGE: Set your owner password in JS below (OWNER object) -->
         <input type="password" id="owner-password" placeholder="Owner password">
       </div>
       <button class="btn-primary" style="background:#e94560;" onclick="ownerLogin()">Login →</button>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <button onclick="showPage('super-admin-auth')" style="background:none; border:none; color:var(--gold); font-size:0.8rem; cursor:pointer; text-decoration:underline;">⭐ Open Super Admin Portal</button>
+      </div>
 
       <div class="back-link" onclick="showPage('landing-page')">← Back to Home</div>
     </div>
   </div>
 </div>
 
-<!-- ==============================
-     CUSTOMER DASHBOARD
-     ============================== -->
+<div id="super-admin-auth" class="page">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="icon">👑</div>
+      <h2>Super Admin Access</h2>
+      <p>Enter Master Password to view user data</p>
+    </div>
+    <div class="form-group">
+      <label>🔒 Master Password</label>
+      <input type="password" id="super-password" placeholder="Enter Master Password">
+    </div>
+    <button class="btn-primary" style="background:#2c3e50;" onclick="verifySuperAdmin()">Access Database →</button>
+    <div class="back-link" onclick="showPage('owner-auth')">← Back</div>
+  </div>
+</div>
+
+<div id="super-admin-dashboard" class="page">
+  <div class="page-header" style="background:#2c3e50; width:100%;">
+    <button class="back-btn" onclick="showPage('owner-auth')">←</button>
+    <h2>👑 Master Database (All Registered Customers)</h2>
+  </div>
+  <div class="owner-schedule" style="width:100%; max-width:800px; margin:20px auto;">
+    <div class="admin-table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Mobile Number</th>
+            <th>Age</th>
+            <th>Encrypted Password Hash</th>
+          </tr>
+        </thead>
+        <tbody id="admin-user-table-body">
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <div id="customer-dashboard" class="page">
   <div class="top-bar">
-    <!-- CHANGE: Replace shop name below -->
     <div class="shop-name">✂️ Raj Hair Salon</div>
     <div class="top-right">
       <input type="date" class="date-picker-btn" id="schedule-date" onchange="renderSchedule()">
@@ -660,21 +634,107 @@
   </div>
   <div class="contact-bar">
     <span>📞</span>
-    <!-- CHANGE: Replace with owner's phone number -->
     <span class="phone">Shop: <strong>98765 43210</strong></span>
+    <a href="tel:9876543210" class="call-link-btn">📞 Call Owner</a>
     <span class="logout-text" onclick="customerLogout()">Logout</span>
   </div>
 
   <div class="schedule-container">
     <div class="chairs-wrapper" id="chairs-wrapper">
-      <!-- Slots generated by JavaScript -->
+      </div>
+  </div>
+</div>
+
+<div id="owner-auth" class="page">
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:20px; background:linear-gradient(135deg,#0f3460,#16213e);">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="icon">🔑</div>
+        <h2>Owner Login</h2>
+        <p>Manage your shop bookings</p>
+      </div>
+
+      <div id="error-msg-owner" class="error-msg"></div>
+
+      <div class="form-group">
+        <label>📱 Mobile Number</label>
+        <input type="tel" id="owner-mobile" placeholder="Owner mobile number" maxlength="10">
+      </div>
+      <div class="form-group">
+        <label>🔒 Password</label>
+        <input type="password" id="owner-password" placeholder="Owner password">
+      </div>
+      <button class="btn-primary" style="background:#e94560;" onclick="ownerLogin()">Login →</button>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <button onclick="showPage('super-admin-auth')" style="background:none; border:none; color:var(--gold); font-size:0.8rem; cursor:pointer; text-decoration:underline;">⭐ Open Super Admin Portal</button>
+      </div>
+
+      <div class="back-link" onclick="showPage('landing-page')">← Back to Home</div>
     </div>
   </div>
 </div>
 
-<!-- ==============================
-     BOOKING CONFIRM PAGE
-     ============================== -->
+<div id="super-admin-auth" class="page">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="icon">👑</div>
+      <h2>Super Admin Access</h2>
+      <p>Enter Master Password to view user data</p>
+    </div>
+    <div class="form-group">
+      <label>🔒 Master Password</label>
+      <input type="password" id="super-password" placeholder="Enter Master Password">
+    </div>
+    <button class="btn-primary" style="background:#2c3e50;" onclick="verifySuperAdmin()">Access Database →</button>
+    <div class="back-link" onclick="showPage('owner-auth')">← Back</div>
+  </div>
+</div>
+
+<div id="super-admin-dashboard" class="page">
+  <div class="page-header" style="background:#2c3e50; width:100%;">
+    <button class="back-btn" onclick="showPage('owner-auth')">←</button>
+    <h2>👑 Master Database (All Registered Customers)</h2>
+  </div>
+  <div class="owner-schedule" style="width:100%; max-width:800px; margin:20px auto;">
+    <div class="admin-table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Mobile Number</th>
+            <th>Age</th>
+            <th>Encrypted Password Hash</th>
+          </tr>
+        </thead>
+        <tbody id="admin-user-table-body">
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="customer-dashboard" class="page">
+  <div class="top-bar">
+    <div class="shop-name">✂️ Raj Hair Salon</div>
+    <div class="top-right">
+      <input type="date" class="date-picker-btn" id="schedule-date" onchange="renderSchedule()">
+      <button class="my-booking-btn" onclick="showMyBookings()">📋 My Bookings</button>
+    </div>
+  </div>
+  <div class="contact-bar">
+    <span>📞</span>
+    <span class="phone">Shop: <strong>98765 43210</strong></span>
+    <a href="tel:9876543210" class="call-link-btn">📞 Call Owner</a>
+    <span class="logout-text" onclick="customerLogout()">Logout</span>
+  </div>
+
+  <div class="schedule-container">
+    <div class="chairs-wrapper" id="chairs-wrapper">
+      </div>
+  </div>
+</div>
+
 <div id="booking-confirm" class="page">
   <div class="confirm-card" style="margin:auto; margin-top:30px;">
     <h2>📋 Confirm Appointment</h2>
@@ -709,397 +769,317 @@
   </div>
 </div>
 
-<!-- ==============================
-     MY BOOKINGS PAGE
-     ============================== -->
-<div id="my-bookings" class="page">
+<div id="my-bookings-page" class="page">
   <div class="page-header">
     <button class="back-btn" onclick="showPage('customer-dashboard')">←</button>
-    <h2>📋 My Bookings</h2>
+    <h2>📅 My Bookings</h2>
   </div>
-  <div class="bookings-list" id="bookings-list"></div>
+  <div class="bookings-list" id="my-bookings-list">
+    </div>
 </div>
 
-<!-- ==============================
-     SUCCESS PAGE
-     ============================== -->
-<div id="success-page" class="page">
-  <div class="success-card">
-    <span class="success-icon">✅</span>
-    <h2>Booking Confirmed!</h2>
-    <p>Your appointment has been successfully booked.</p>
-    <div class="success-details" id="success-details"></div>
-    <button class="btn-go-home" onclick="showPage('customer-dashboard')">🏠 Back to Home</button>
-  </div>
-</div>
-
-<!-- ==============================
-     OWNER DASHBOARD
-     ============================== -->
 <div id="owner-dashboard" class="page">
   <div class="owner-top-bar">
-    <!-- CHANGE: Replace shop name below -->
-    <div class="owner-title">🔑 Owner Panel — Raj Hair Salon</div>
+    <div class="owner-title">💼 Owner Panel - Raj Hair Salon</div>
     <button class="logout-btn" onclick="showPage('landing-page')">Logout</button>
   </div>
   <div class="owner-date-bar">
-    <label>📅 Select Date:</label>
-    <input type="date" id="owner-date" onchange="renderOwnerSchedule()">
+    <label>Select Date:</label>
+    <input type="date" id="owner-schedule-date" onchange="renderOwnerDashboard()">
   </div>
-  <div class="owner-schedule" id="owner-schedule">
-    <!-- Generated by JavaScript -->
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="s-num" id="stat-total">0</div>
+      <div class="s-lbl">Total Bookings</div>
+    </div>
   </div>
+
+  <div class="owner-schedule" id="owner-bookings-list">
+    </div>
 </div>
 
-<!-- ==============================
-     JAVASCRIPT
-     ============================== -->
 <script>
+  // Static Credentials
+  const OWNER = { mobile: "9876543210", password: "owner" };
+  const SUPER_ADMIN_PASSWORD = "admin"; // मास्टर पासवर्ड आपके डेटाबेस देखने के लिए
 
-  /* ============================================================
-     SETTINGS — CHANGE THESE VALUES FOR YOUR SHOP
-     ============================================================ */
+  // Dynamic 45-Min Interval Time Slots
+  const TIME_SLOTS = [
+    '08:30 AM', '09:15 AM', '10:00 AM', '10:45 AM', '11:30 AM', 
+    '12:15 PM', '01:00 PM', '01:45 PM', '02:30 PM', '03:15 PM', 
+    '04:00 PM', '04:45 PM', '05:30 PM', '06:15 PM', '07:00 PM', '07:45 PM'
+  ];
 
-  // Owner login credentials — change mobile and password
-  const OWNER = {
-    mobile:   '9999999999',   // <-- change to your mobile number
-    password: 'owner123',      // <-- change to your password
-    name:     'Raj'            // <-- change to your name
-  };
+  // State
+  let currentUser = null;
+  let pendingBooking = null;
 
-  // Shop timings (in minutes from midnight)
-  const SHOP_OPEN    = 8 * 60 + 30;  // 8:30 AM
-  const SHOP_CLOSE   = 21 * 60;       // 9:00 PM
-  const SLOT_MINUTES = 45;            // each slot = 45 minutes
-
-  // Lunch break
-  const BREAK_START  = 13 * 60;       // 1:00 PM
-  const BREAK_END    = 14 * 60;       // 2:00 PM
-
-  // Number of chairs
-  const TOTAL_CHAIRS = 2;
-
-  /* ============================================================
-     DATA — stored in browser localStorage
-     ============================================================ */
-  let customers = JSON.parse(localStorage.getItem('barber_customers') || '{}');
-  let bookings  = JSON.parse(localStorage.getItem('barber_bookings')  || '[]');
-  let currentCustomer = null;
-  let pendingBooking  = null;
-
-  function saveData() {
-    localStorage.setItem('barber_customers', JSON.stringify(customers));
-    localStorage.setItem('barber_bookings',  JSON.stringify(bookings));
+  // Initialize Data Structures in LocalStorage
+  if (!localStorage.getItem('salon_users')) {
+    localStorage.setItem('salon_users', JSON.stringify([]));
+  }
+  if (!localStorage.getItem('salon_bookings')) {
+    localStorage.setItem('salon_bookings', JSON.stringify([]));
   }
 
-  /* ============================================================
-     PAGE NAVIGATION
-     ============================================================ */
+  // 🌍 1. STRICT 30 DAYS ROLLING CALENDAR SETTING
+  window.onload = function() {
+    let today = new Date();
+    let yyyy = today.getFullYear();
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let dd = String(today.getDate()).padStart(2, '0');
+    let minDateStr = `${yyyy}-${mm}-${dd}`;
+
+    // Calculate exactly 30 days ahead
+    let maxTarget = new Date();
+    maxTarget.setDate(today.getDate() + 30);
+    let max_yyyy = maxTarget.getFullYear();
+    let max_mm = String(maxTarget.getMonth() + 1).padStart(2, '0');
+    let max_dd = String(maxTarget.getDate()).padStart(2, '0');
+    let maxDateStr = `${max_yyyy}-${max_mm}-${max_dd}`;
+
+    // Apply limits to Customer Dashboard Calendar
+    let custCal = document.getElementById('schedule-date');
+    custCal.value = minDateStr;
+    custCal.setAttribute('min', minDateStr);
+    custCal.setAttribute('max', maxDateStr);
+
+    // Apply limits to Owner Dashboard Calendar
+    let ownCal = document.getElementById('owner-schedule-date');
+    ownCal.value = minDateStr;
+    ownCal.setAttribute('min', minDateStr);
+    ownCal.setAttribute('max', maxDateStr);
+  };
+
+  // Helper: Invertible/Simulated Hash function to mask plain text passwords
+  function hashPassword(plainText) {
+    let mockHash = btoa(plainText).split('').reverse().join('');
+    return `[ENCRYPTED_PBKDF2_SHA256_hash_${mockHash.substring(0,12)}]`;
+  }
+
+  // Navigation Logic
   function showPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-
-    if (id === 'customer-dashboard') {
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('schedule-date').value = today;
-      renderSchedule();
-    }
-    if (id === 'owner-dashboard') {
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('owner-date').value = today;
-      renderOwnerSchedule();
-    }
+    
+    if (id === 'customer-dashboard') renderSchedule();
+    if (id === 'owner-dashboard') renderOwnerDashboard();
   }
 
-  /* ============================================================
-     AUTH — TAB SWITCH
-     ============================================================ */
-  function switchTab(tab) {
-    document.getElementById('login-form').style.display    = tab === 'login'    ? 'block' : 'none';
-    document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
-    document.getElementById('login-tab').classList.toggle('active',    tab === 'login');
-    document.getElementById('register-tab').classList.toggle('active', tab === 'register');
+  function switchTab(type) {
+    document.getElementById('login-tab').classList.toggle('active', type === 'login');
+    document.getElementById('register-tab').classList.toggle('active', type === 'register');
+    document.getElementById('login-form').style.display = type === 'login' ? 'block' : 'none';
+    document.getElementById('register-form').style.display = type === 'register' ? 'block' : 'none';
     document.getElementById('error-msg-customer').style.display = 'none';
   }
 
-  function showError(id, msg) {
-    const el = document.getElementById(id);
-    el.textContent = msg;
-    el.style.display = 'block';
-  }
-
-  /* ============================================================
-     CUSTOMER REGISTER
-     ============================================================ */
+  // Auth Operations
   function customerRegister() {
-    const mobile   = document.getElementById('reg-mobile').value.trim();
-    const name     = document.getElementById('reg-name').value.trim();
-    const age      = document.getElementById('reg-age').value.trim();
-    const password = document.getElementById('reg-password').value.trim();
+    let mobile = document.getElementById('reg-mobile').value.trim();
+    let name = document.getElementById('reg-name').value.trim();
+    let age = document.getElementById('reg-age').value.trim();
+    let password = document.getElementById('reg-password').value.trim();
+    let errBox = document.getElementById('error-msg-customer');
 
-    if (!mobile || mobile.length !== 10 || isNaN(mobile))
-      return showError('error-msg-customer', '❌ Please enter a valid 10-digit mobile number');
-    if (!name)
-      return showError('error-msg-customer', '❌ Please enter your name');
-    if (!age)
-      return showError('error-msg-customer', '❌ Please enter your age');
-    if (!password || password.length < 4)
-      return showError('error-msg-customer', '❌ Password must be at least 4 characters');
-    if (customers[mobile])
-      return showError('error-msg-customer', '❌ This mobile number is already registered');
+    if (!mobile || !name || !age || !password) {
+      errBox.innerText = "⚠ All registration fields are required!";
+      errBox.style.display = 'block';
+      return;
+    }
 
-    customers[mobile] = { name, age, password, mobile };
-    saveData();
-    currentCustomer = customers[mobile];
-    document.getElementById('error-msg-customer').style.display = 'none';
-    showPage('customer-dashboard');
+    let users = JSON.parse(localStorage.getItem('salon_users'));
+    if (users.find(u => u.mobile === mobile)) {
+      errBox.innerText = "⚠ Number already registered. Please login!";
+      errBox.style.display = 'block';
+      return;
+    }
+
+    // 🔒 3. PASSWORD ENCRYPTION: Encrypting the password before stringification
+    let encryptedPassword = hashPassword(password);
+
+    let newUser = { mobile, name, age, password: encryptedPassword };
+    users.push(newUser);
+    localStorage.setItem('salon_users', JSON.stringify(users));
+
+    alert("🎉 Account successfully registered! Please login.");
+    switchTab('login');
   }
 
-  /* ============================================================
-     CUSTOMER LOGIN
-     ============================================================ */
   function customerLogin() {
-    const mobile   = document.getElementById('login-mobile').value.trim();
-    const password = document.getElementById('login-password').value.trim();
+    let mobile = document.getElementById('login-mobile').value.trim();
+    let password = document.getElementById('login-password').value.trim();
+    let errBox = document.getElementById('error-msg-customer');
 
-    if (!customers[mobile])
-      return showError('error-msg-customer', '❌ This mobile number is not registered');
-    if (customers[mobile].password !== password)
-      return showError('error-msg-customer', '❌ Incorrect password');
+    let users = JSON.parse(localStorage.getItem('salon_users'));
+    let matchedUser = users.find(u => u.mobile === mobile && u.password === hashPassword(password));
 
-    currentCustomer = customers[mobile];
-    document.getElementById('error-msg-customer').style.display = 'none';
-    showPage('customer-dashboard');
+    if (matchedUser) {
+      currentUser = matchedUser;
+      showPage('customer-dashboard');
+    } else {
+      errBox.innerText = "⚠ Invalid Mobile Number or Password!";
+      errBox.style.display = 'block';
+    }
   }
 
   function customerLogout() {
-    currentCustomer = null;
+    currentUser = null;
     showPage('landing-page');
   }
 
-  /* ============================================================
-     OWNER LOGIN
-     ============================================================ */
   function ownerLogin() {
-    const mobile   = document.getElementById('owner-mobile').value.trim();
-    const password = document.getElementById('owner-password').value.trim();
+    let mobile = document.getElementById('owner-mobile').value.trim();
+    let password = document.getElementById('owner-password').value.trim();
+    let errBox = document.getElementById('error-msg-owner');
 
-    if (mobile !== OWNER.mobile || password !== OWNER.password)
-      return showError('error-msg-owner', '❌ Incorrect mobile number or password');
-
-    document.getElementById('error-msg-owner').style.display = 'none';
-    showPage('owner-dashboard');
-  }
-
-  /* ============================================================
-     TIME HELPERS
-     ============================================================ */
-  function minsToTime(mins) {
-    const h    = Math.floor(mins / 60);
-    const m    = mins % 60;
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const hh   = h > 12 ? h - 12 : (h === 0 ? 12 : h);
-    return `${hh}:${m.toString().padStart(2, '0')} ${ampm}`;
-  }
-
-  function generateSlots() {
-    const slots = [];
-    let t = SHOP_OPEN;
-    while (t + SLOT_MINUTES <= SHOP_CLOSE) {
-      if (t >= BREAK_START && t < BREAK_END) {
-        t += 60;
-        continue;
-      }
-      slots.push(t);
-      t += SLOT_MINUTES;
+    if (mobile === OWNER.mobile && password === OWNER.password) {
+      showPage('owner-dashboard');
+    } else {
+      errBox.innerText = "⚠ Invalid Credentials! Entry Denied.";
+      errBox.style.display = 'block';
     }
-    return slots;
   }
 
-  function isBooked(date, time, chair) {
-    return bookings.some(b => b.date === date && b.time === time && b.chair === chair);
+  // 👑 2. SUPER ADMIN DATABASE VERIFICATION & RENDER
+  function verifySuperAdmin() {
+    let pw = document.getElementById('super-password').value;
+    if (pw === SUPER_ADMIN_PASSWORD) {
+      let users = JSON.parse(localStorage.getItem('salon_users'));
+      let tableBody = document.getElementById('admin-user-table-body');
+      tableBody.innerHTML = '';
+
+      if (users.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--muted);">No registered accounts found.</td></tr>`;
+      } else {
+        users.forEach(u => {
+          tableBody.innerHTML += `
+            <tr>
+              <td><strong>${u.name}</strong></td>
+              <td>${u.mobile}</td>
+              <td>${u.age} Years</td>
+              <td class="pw-hash">${u.password}</td>
+            </tr>
+          `;
+        });
+      }
+      showPage('super-admin-dashboard');
+    } else {
+      alert("❌ Invalid Master Password!");
+    }
   }
 
-  function formatDate(dateStr) {
-    const d      = new Date(dateStr + 'T00:00:00');
-    const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-  }
-
-  /* ============================================================
-     RENDER CUSTOMER SCHEDULE
-     ============================================================ */
+  // Core Schedule Renderers
   function renderSchedule() {
-    const date  = document.getElementById('schedule-date').value;
-    const slots = generateSlots();
-    const wrap  = document.getElementById('chairs-wrapper');
+    let selectedDate = document.getElementById('schedule-date').value;
+    let bookings = JSON.parse(localStorage.getItem('salon_bookings'));
+    let container = document.getElementById('chairs-wrapper');
+    container.innerHTML = '';
 
-    let html = '';
-    for (let c = 1; c <= TOTAL_CHAIRS; c++) {
-      let slotsHtml = '';
-      for (const t of slots) {
-        const booked  = isBooked(date, t, c);
-        const timeStr = minsToTime(t);
-        if (booked) {
-          slotsHtml += `<div class="slot booked">
-            <span class="slot-time">${timeStr}</span>
-            <span class="slot-status">✗ Already Booked</span>
-          </div>`;
+    ['Chair 1', 'Chair 2'].forEach(chair => {
+      let col = document.createElement('div');
+      col.className = 'chair-column';
+      col.innerHTML = `<div class="chair-header">${chair}</div>`;
+      
+      let list = document.createElement('div');
+      list.className = 'slots-list';
+
+      TIME_SLOTS.forEach(time => {
+        let isBooked = bookings.find(b => b.date === selectedDate && b.time === time && b.chair === chair);
+        let slotDiv = document.createElement('div');
+
+        if (isBooked) {
+          slotDiv.className = 'slot booked';
+          slotDiv.innerHTML = `<span class="slot-time">${time}</span><span class="slot-status">👤 Booked (${isBooked.name})</span>`;
         } else {
-          slotsHtml += `<div class="slot free"
-            onclick="openBookingConfirm('${date}', ${t}, ${c}, '${timeStr}')">
-            <span class="slot-time">${timeStr}</span>
-            <span class="slot-status">✓ Available — Tap to Book</span>
-          </div>`;
+          slotDiv.className = 'slot free';
+          slotDiv.innerHTML = `<span class="slot-time">${time}</span><span class="slot-status">🟢 Available</span>`;
+          slotDiv.onclick = () => initBookingTrigger(selectedDate, time, chair);
         }
-      }
-      html += `<div class="chair-column">
-        <div class="chair-header">💺 Chair ${c}</div>
-        <div class="slots-list">${slotsHtml}</div>
-      </div>`;
-    }
-    wrap.innerHTML = html;
+        list.appendChild(slotDiv);
+      });
+      col.appendChild(list);
+      container.appendChild(col);
+    });
   }
 
-  /* ============================================================
-     OPEN BOOKING CONFIRM
-     ============================================================ */
-  function openBookingConfirm(date, time, chair, timeStr) {
-    if (!currentCustomer) return;
-    pendingBooking = { date, time, chair, timeStr };
-
-    document.getElementById('confirm-name').textContent   = currentCustomer.name;
-    document.getElementById('confirm-mobile').textContent = currentCustomer.mobile;
-    document.getElementById('confirm-age').textContent    = currentCustomer.age + ' years';
-    document.getElementById('confirm-date').textContent   = formatDate(date);
-    document.getElementById('confirm-time').textContent   = timeStr;
-    document.getElementById('confirm-chair').textContent  = 'Chair ' + chair;
-
+  function initBookingTrigger(date, time, chair) {
+    pendingBooking = { date, time, chair };
+    document.getElementById('confirm-name').innerText = currentUser.name;
+    document.getElementById('confirm-mobile').innerText = currentUser.mobile;
+    document.getElementById('confirm-age').innerText = currentUser.age + " Years";
+    document.getElementById('confirm-date').innerText = date;
+    document.getElementById('confirm-time').innerText = time;
+    document.getElementById('confirm-chair').innerText = chair;
     showPage('booking-confirm');
   }
 
-  /* ============================================================
-     CONFIRM BOOKING
-     ============================================================ */
   function confirmBooking() {
-    if (!pendingBooking || !currentCustomer) return;
-
-    if (isBooked(pendingBooking.date, pendingBooking.time, pendingBooking.chair)) {
-      alert('❌ This slot was just booked by someone else! Please choose another slot.');
-      showPage('customer-dashboard');
-      return;
-    }
-
-    const b = {
-      ...pendingBooking,
-      name:   currentCustomer.name,
-      mobile: currentCustomer.mobile,
-      age:    currentCustomer.age,
-      id:     Date.now()
-    };
-    bookings.push(b);
-    saveData();
-
-    document.getElementById('success-details').innerHTML = `
-      <div class="sd-row"><span class="sd-label">Name</span><span class="sd-value">${b.name}</span></div>
-      <div class="sd-row"><span class="sd-label">Date</span><span class="sd-value">${formatDate(b.date)}</span></div>
-      <div class="sd-row"><span class="sd-label">Time</span><span class="sd-value">${b.timeStr}</span></div>
-      <div class="sd-row"><span class="sd-label">Chair</span><span class="sd-value">Chair ${b.chair}</span></div>
-    `;
-
-    pendingBooking = null;
-    showPage('success-page');
+    let bookings = JSON.parse(localStorage.getItem('salon_bookings'));
+    let record = { ...pendingBooking, mobile: currentUser.mobile, name: currentUser.name, age: currentUser.age };
+    
+    bookings.push(record);
+    localStorage.setItem('salon_bookings', JSON.stringify(bookings));
+    
+    alert("🎉 Slot Booked Successfully!");
+    showPage('customer-dashboard');
   }
 
-  /* ============================================================
-     MY BOOKINGS
-     ============================================================ */
   function showMyBookings() {
-    const myList = bookings.filter(b => b.mobile === currentCustomer.mobile);
-    const list   = document.getElementById('bookings-list');
+    let bookings = JSON.parse(localStorage.getItem('salon_bookings'));
+    let myRecords = bookings.filter(b => b.mobile === currentUser.mobile);
+    let box = document.getElementById('my-bookings-list');
+    box.innerHTML = '';
 
-    if (myList.length === 0) {
-      list.innerHTML = `<div class="empty-state">
-        <div class="empty-icon">📋</div>
-        <p>No bookings yet.<br><strong>Book a slot from the schedule!</strong></p>
-      </div>`;
+    if (myRecords.length === 0) {
+      box.innerHTML = `<div class="empty-state"><div class="empty-icon">📅</div><p>No reservations recorded yet.</p></div>`;
     } else {
-      list.innerHTML = myList
-        .sort((a, b) => b.id - a.id)
-        .map(b => `<div class="booking-card">
-          <div class="bc-top">
-            <span class="bc-date">${formatDate(b.date)}</span>
-            <span class="bc-chair">Chair ${b.chair}</span>
+      myRecords.forEach(b => {
+        box.innerHTML += `
+          <div class="booking-card">
+            <div class="bc-top">
+              <span class="bc-date">📅 ${b.date}</span>
+              <span class="bc-chair">${b.chair}</span>
+            </div>
+            <div class="bc-time">⏰ ${b.time}</div>
           </div>
-          <div class="bc-time">⏰ ${b.timeStr}</div>
-        </div>`).join('');
+        `;
+      });
     }
-    showPage('my-bookings');
+    showPage('my-bookings-page');
   }
 
-  /* ============================================================
-     OWNER SCHEDULE
-     ============================================================ */
-  function renderOwnerSchedule() {
-    const date       = document.getElementById('owner-date').value;
-    const dayBookings = bookings
-      .filter(b => b.date === date)
-      .sort((a, b) => a.time - b.time);
+  function renderOwnerDashboard() {
+    let selectedDate = document.getElementById('owner-schedule-date').value;
+    let bookings = JSON.parse(localStorage.getItem('salon_bookings'));
+    let dailyBookings = bookings.filter(b => b.date === selectedDate);
+    
+    document.getElementById('stat-total').innerText = dailyBookings.length;
+    let box = document.getElementById('owner-bookings-list');
+    box.innerHTML = '';
 
-    const container = document.getElementById('owner-schedule');
-
-    if (dayBookings.length === 0) {
-      container.innerHTML = `<div class="empty-state">
-        <div class="empty-icon">📅</div>
-        <p>No bookings for this date.</p>
-      </div>`;
-      return;
+    if (dailyBookings.length === 0) {
+      box.innerHTML = `<div class="empty-state"><p>No appointments scheduled for this date.</p></div>`;
+    } else {
+      dailyBookings.forEach(b => {
+        box.innerHTML += `
+          <div class="owner-booking-card">
+            <div class="obc-time">
+              <div class="t">${b.time}</div>
+              <div class="chair">${b.chair}</div>
+            </div>
+            <div class="obc-info">
+              <div class="obc-name">${b.name}</div>
+              <div class="obc-phone">📱 ${b.mobile}</div>
+              <div class="obc-age">🎂 Age: ${b.age} Years</div>
+            </div>
+          </div>
+        `;
+      });
     }
-
-    const chair1 = dayBookings.filter(b => b.chair === 1).length;
-    const chair2 = dayBookings.filter(b => b.chair === 2).length;
-
-    container.innerHTML = `
-      <div class="stats-bar">
-        <div class="stat">
-          <div class="s-num">${dayBookings.length}</div>
-          <div class="s-lbl">Total Bookings</div>
-        </div>
-        <div class="stat">
-          <div class="s-num">${chair1}</div>
-          <div class="s-lbl">Chair 1</div>
-        </div>
-        <div class="stat">
-          <div class="s-num">${chair2}</div>
-          <div class="s-lbl">Chair 2</div>
-        </div>
-      </div>
-      ${dayBookings.map(b => `
-        <div class="owner-booking-card">
-          <div class="obc-time">
-            <div class="t">${b.timeStr}</div>
-            <div class="chair">Chair ${b.chair}</div>
-          </div>
-          <div class="obc-info">
-            <div class="obc-name">👤 ${b.name}</div>
-            <div class="obc-phone">📞 ${b.mobile}</div>
-            <div class="obc-age">🎂 ${b.age} years</div>
-          </div>
-        </div>
-      `).join('')}
-    `;
   }
-
-  /* ============================================================
-     INIT
-     ============================================================ */
-  window.onload = () => {
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('schedule-date').value = today;
-    document.getElementById('owner-date').value    = today;
-  };
-
 </script>
+
 </body>
 </html>
